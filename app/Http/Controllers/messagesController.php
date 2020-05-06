@@ -14,7 +14,7 @@ class messagesController extends controller
 
     public function getIndex()
     {
-
+        return view('front.guestbook');
     }
     public function postAdd()
     {

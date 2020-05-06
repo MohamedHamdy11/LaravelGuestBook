@@ -14,6 +14,7 @@ class homeController extends usersController
     public function getIndex()
     {
 
+        return view('front.index');
 
     }
 
