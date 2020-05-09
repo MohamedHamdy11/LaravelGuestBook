@@ -8,13 +8,17 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Products;
 
-class homeController extends usersController
+class homeController extends Controller
 {
     public function getIndex()
     {
+        $allProducts = Products::orderBy('id','DESC')->limit(3)->get();
 
-        return view('front.index');
+        return view('front.index')
+            ->with('title','Guest Book')
+            ->with('products',$allProducts);
 
     }
 

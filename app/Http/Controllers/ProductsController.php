@@ -8,21 +8,23 @@ class ProductsController extends Controller
 {
     public function getIndex()
     {
-        return view('front.products');
-
-        /*
-         $products = Products::all();
-        return view('products')
+         $products = Products::orderBy('id','DESC')->get();
+         return view('front.products')
             ->with('title','our products')
-            ->with('products',$products)
-            ->with('errors',['name is required','password is required']);
-        */
+            ->with('products',$products);
+
     }
 
     public function getProduct($id=0)
     {
+        $product = Products::find($id);
 
-        return view('front.product');
+        if(!$product)
+            abort(404);
+
+        return view('front.product')
+            ->with('title','product-'.$product->title)
+            ->with('product',$product);
     }
 
 
