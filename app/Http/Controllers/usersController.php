@@ -4,11 +4,19 @@
 namespace App\Http\Controllers;
 
 
+use App\models\Users;
+
 class usersController extends controller
 {
     public function getLogin()
     {
-        return view('login')
+        /*
+        $user = Users::find(1);
+        $user->password = \Hash::make('01226497712');
+        $user->save();
+        */
+
+        return view('front.login')
             ->with('title','Login Now');
     }
 
@@ -25,13 +33,21 @@ class usersController extends controller
 
         if ($validation->passes())
         {
-           // return redirect('bl7'); // this is ues error
-            echo 'ooooooooo';
+            if(\Auth::attempt(['username'=>\Input::get('username'),'password'=>\Input::get('password')]))
+                return redirect('admin');
+            else
+            {
+                return redirect()
+                    ->back()
+                    ->with('title','Login Now')
+                    ->with('errors',['Invalid username & password']);
+            }
         }
         else
         {
             $errors = $validation->errors()->all();
-            return view('login')
+            return redirect()
+                ->back()
                 ->with('title','Login Now')
                 ->with('errors',$errors);
 

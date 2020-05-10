@@ -7,16 +7,16 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="Soft Masr - Project">
         <meta name="author" content="Ahmed ElShahat">
-        <title>Soft Masr</title>
+        <title>Login</title>
 
         <!-- FontAwesome -->
-        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{asset('resources')}}/assets/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Bootstrap -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{asset('resources')}}/assets/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Style -->
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="{{asset('resources')}}/assets/css/style.css" rel="stylesheet">
     </head>
     <body class="admin-login">
         <div class="container">
@@ -28,14 +28,20 @@
                                 <div class="page-header">
                                     <h1>Login <small>Admin Panel</small></h1>
                                 </div>
-                                <div class="alert alert-danger">
-                                    <strong>Error:</strong>
-                                    <ul>
-                                        <li>Invalid Username</li>
-                                        <li>Invalid Password</li>
-                                    </ul>
-                                </div>
-                                <form class="form-horizontal">
+
+                                <?php $errors = session('errors'); ?>
+                                @if(is_array($errors) && count($errors)>0)
+                                    <div class="alert alert-danger">
+                                        <strong>Errors:</strong>
+                                        <ul>
+                                        @foreach($errors as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <form class="form-horizontal" action="{{url('users/login')}}" method="post">
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="input-group">
@@ -62,6 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="clearfix">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-sign-in"></i> Sign in</button>
                                     </div>
                                 </form>
@@ -74,8 +81,8 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="assets/js/jquery.js"></script>
+        <script src="{{asset('resources')}}/assets/js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="{{asset('resources')}}/assets/js/bootstrap.min.js"></script>
     </body>
 </html>
