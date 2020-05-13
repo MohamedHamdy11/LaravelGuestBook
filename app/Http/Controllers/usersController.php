@@ -57,6 +57,14 @@ class usersController extends controller
     }
 
 
+    public function getLogout()
+    {
+        \Auth::logout();
+
+        return redirect('/');
+    }
+
+
 
 
 }

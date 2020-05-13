@@ -17,6 +17,7 @@
 Route::controller('admin/users','Admin\adminUsersController');
 Route::controller('admin/products','Admin\adminProductsController');
 Route::controller('admin/messages','Admin\adminMessagesController');
+Route::get('admin','Admin\adminUsersController@getAdmin');
 Route::controller('messages','messagesController');
 Route::controller('products','ProductsController');
 Route::controller('users','usersController');
